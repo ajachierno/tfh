@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TFH - This Fucking House</title>
+  <meta name="theme-color" content="#0d101c">
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(#0d101c, #0e1114);
+    }
+
+    /* Blurred copy fills any space the full image doesn't cover */
+    .backdrop {
+      position: fixed;
+      inset: -40px;
+      background: url("background.jpg") center / cover no-repeat;
+      filter: blur(60px) brightness(0.45);
+    }
+
+    /* The full image, as large as fits the screen, centered.
+       Hotspot percentages below are relative to this box. */
+    .scene {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      aspect-ratio: 864 / 1152;
+      height: min(100dvh, calc(100vw * 1152 / 864));
+      background: url("background.jpg") center / contain no-repeat;
+      /* Feather the edges so the image melts into the backdrop */
+      --fade: linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent),
+              linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+      -webkit-mask-image: var(--fade);
+      -webkit-mask-composite: source-in;
+      mask-image: var(--fade);
+      mask-composite: intersect;
+    }
+
+    /* Invisible link over the front door (image pixels 642-718 x 885-1055) */
+    .door {
+      position: absolute;
+      left: 74.3%;
+      top: 76.8%;
+      width: 8.8%;
+      height: 14.8%;
+      cursor: default;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <main class="scene" role="img" aria-label="TFH - This Fucking House">
+    <a class="door" href="https://ha.tfh.lol" aria-label="Enter"></a>
+  </main>
+</body>
+</html>
